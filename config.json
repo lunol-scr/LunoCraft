@@ -1,0 +1,12 @@
+{
+  "launcher_title": "Luno Launcher",
+  "server": {
+    "name": "luno-survival",
+    "ip": "185.9.145.231:32065"
+  },
+  "minecraft_version": "1.21.11",
+  "default_ram_mb": 4096,
+  "mods_zip": "assets/mods.zip",
+  "data_dir_name": "LunoCraft",
+  "mods_manifest_url": "https://raw.githubusercontent.com/ВАШ_НИК/ВАШ_РЕПО/main/mods.json"
+}
