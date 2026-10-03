@@ -3,14 +3,22 @@ name: Update mods manifest
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag that contains mods.zip (for example mods-v1)"
+        required: true
+        default: "mods-v1"
 
 permissions:
   contents: write
 
 jobs:
   manifest:
-    if: startsWith(github.event.release.tag_name, 'mods-')
+    if: github.event_name == 'workflow_dispatch' || startsWith(github.event.release.tag_name, 'mods-')
     runs-on: ubuntu-latest
+    env:
+      TAG: ${{ github.event.release.tag_name || github.event.inputs.tag }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -19,18 +27,18 @@ jobs:
       - name: Download mods.zip from the release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release download "${{ github.event.release.tag_name }}" --pattern mods.zip --clobber
+        run: gh release download "$TAG" --pattern mods.zip --clobber
 
       - name: Build manifest
         run: |
-          TAG="${{ github.event.release.tag_name }}"
           OUT=mods.json
           case "$TAG" in *beta*) OUT=mods_beta.json;; esac
           python3 make_mods_manifest.py mods.zip "https://github.com/${{ github.repository }}/releases/download/${TAG}/mods.zip" "$OUT"
+          cat "$OUT"
 
       - name: Commit manifest
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           for f in mods.json mods_beta.json; do [ -f "$f" ] && git add "$f"; done
-          git diff --cached --quiet || (git commit -m "Update mods manifest (${{ github.event.release.tag_name }})" && git push)
+          git diff --cached --quiet && echo "Manifest unchanged, nothing to commit" || (git commit -m "Update mods manifest ($TAG)" && git push)
