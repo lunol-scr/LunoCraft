@@ -8,5 +8,10 @@
   "default_ram_mb": 4096,
   "mods_zip": "assets/mods.zip",
   "data_dir_name": "LunoCraft",
-  "mods_manifest_url": "https://raw.githubusercontent.com/lunol-scr/LunoCraft/main/mods.json"
+  "github_repo": "lunol-scr/LunoCraft",
+  "mods_manifest_url": "https://raw.githubusercontent.com/lunol-scr/LunoCraft/main/mods.json",
+  "mods_beta_manifest_url": "https://raw.githubusercontent.com/lunol-scr/LunoCraft/main/mods_beta.json",
+  "status_url": "https://raw.githubusercontent.com/lunol-scr/LunoCraft/main/status.json",
+  "strict_mods": false,
+  "auto_update_exe": true
 }

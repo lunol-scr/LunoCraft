@@ -183,9 +183,13 @@ def build_scene(cv, F, info: dict) -> dict:
             check_icon(cv, 92, y + 14, tags=(tag,))
 
     # --- герой по центру
-    cv.create_oval(375, 444, 625, 478, fill="#1c6a2c", outline="")
-    grass_block(cv, 500, 280, 170, tags=("hero",))
+    cv.create_oval(385, 438, 615, 474, fill="#1c6a2c", outline="")
+    grass_block(cv, 500, 292, 160, tags=("hero",))
     text(cv, 500, 470, info["subtitle"], F(11), WHITE, "center")
+
+    # --- баннер (техработы / сообщения); по умолчанию скрыт
+    r["banner"] = panel(cv, 230, 92, 740, 126, "#9a6a00", tag="banner")
+    r["banner_txt"], _ = text(cv, 485, 109, "", F(10), WHITE, "center", tags=("banner",))
 
     # --- карточка сервера справа
     r["srv_card"] = panel(cv, 760, 226, 980, 408, "#14261a")
