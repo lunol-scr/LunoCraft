@@ -8,5 +8,5 @@
   "default_ram_mb": 4096,
   "mods_zip": "assets/mods.zip",
   "data_dir_name": "LunoCraft",
-  "mods_manifest_url": "https://raw.githubusercontent.com/ВАШ_НИК/ВАШ_РЕПО/main/mods.json"
+  "mods_manifest_url": "https://raw.githubusercontent.com/lunol-scr/LunoCraft/main/mods.json"
 }
